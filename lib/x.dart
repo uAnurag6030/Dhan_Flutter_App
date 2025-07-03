@@ -1,6 +1,6 @@
 // import 'dart:ui';
 // import 'package:firstone/Searchbarnew.dart';
-// import 'package:firstone/menuItemsparts/Movers.dart';
+// import 'package:firstone/menuItemsparts/News.dart';
 // import 'package:firstone/menuItemsparts/News.dart';
 // import 'package:firstone/menuItemsparts/WatchList.dart';
 // import 'package:flutter/material.dart';

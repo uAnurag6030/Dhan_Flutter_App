@@ -1,0 +1,10 @@
+// List<BankEntry> filteredBankEntry = [];
+    // for (int i = 0; i < allBanks.length; i++) {
+    //   final bankName = allBanks[i];
+    //   final ltp = double.parse(
+    //     '${900 + i}.${(i * 13 % 100).toString().padLeft(2, '0')}',
+    //   );
+    //   if (filteredBanks.contains(bankName)) {
+    //     filteredBankEntry.add(BankEntry(name: bankName, ltp: ltp, index: i));
+    //   }
+    // }

@@ -7,6 +7,6 @@ class News extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("News"));
+    return Center(child: Text("Movers"));
   }
 }

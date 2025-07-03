@@ -3,3 +3,9 @@ enum SortOrder {
   ltpAsc,
   ltpDesc,
 }
+
+enum NameSort{
+  AtoZ,
+  ZtoA,
+  none
+}

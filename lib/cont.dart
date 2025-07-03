@@ -38,9 +38,9 @@ class MyContain extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Colors.black.withAlpha(50),
-              blurRadius: 4,
+              blurRadius: 1,
               spreadRadius: 1,
-              offset: Offset(0, 2),
+              offset: Offset(0, 1),
             ),
           ],
         ),
