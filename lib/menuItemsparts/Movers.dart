@@ -201,19 +201,19 @@ class _MoversState extends State<Movers> {
               List<dynamic> allMovers=asyncSnapshot.data;
               List <dynamic> filteredMovers=[];
               if(widget.moversSearchText.isEmpty){
-                filteredMovers=movers;
+                filteredMovers=allMovers;
               }else{
                 for(var item in allMovers){
-                  final dispName= (item["exch"]??'').toString();
-                  mainDispName=dispName;
-                  final int ltp = item["ltp"]??'';
-                  LTP=ltp;
-                  ltpList.add(LTP);
+                  final exchName= (item["exch"]??'').toString();
+                 // mainDispName=dispName;
+                  final double ltp = (item["ltp"]??0).toDouble();
+                  // LTP=ltp;
+                  // ltpList.add(LTP);
                   final name = (item['disp']??'').toString().toLowerCase();
                   mainName= name;
                   nameList.add(mainName);
                   if(name.contains(widget.moversSearchText.toLowerCase())){
-                    filteredMovers.add(MoversEntry(name: name, ltp: ltp));
+                    filteredMovers.add(item);
                   }
                 }
               }
@@ -447,11 +447,3 @@ class _MoversState extends State<Movers> {
     );
   }
 }
-
-
-class MoversEntry {
-  final String name;
-  final int ltp;
-  MoversEntry({required this.name, required this.ltp});
-}
-

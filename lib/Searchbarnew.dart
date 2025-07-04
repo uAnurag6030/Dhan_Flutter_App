@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Searchbarnew extends StatefulWidget {
-  final FocusNode focusNode;
-  final TextEditingController controller;
+  late FocusNode focusNode;
+  late TextEditingController controller;
   final void Function(String) onChanged;
 
-  const Searchbarnew({
+   Searchbarnew({
     super.key,
     required this.focusNode,
     required this.controller,
@@ -17,6 +17,22 @@ class Searchbarnew extends StatefulWidget {
 }
 
 class _SearchbarState extends State<Searchbarnew> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    widget.controller=TextEditingController();
+    widget.focusNode= FocusNode();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    widget.controller.dispose();
+    widget.focusNode.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

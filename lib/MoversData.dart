@@ -34,7 +34,7 @@ class _MoversDataState extends State<MoversData> {
     double? percentage= widget.change!/widget.Ltp!;
      String TypeFlag= widget.TypeFlag;
     return Container(
-      height: screenHeight*0.095,
+      height: screenHeight*0.098,
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(1.0),
         borderRadius: BorderRadius.circular(12),

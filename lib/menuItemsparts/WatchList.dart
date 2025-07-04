@@ -9,8 +9,10 @@ import '../data.dart';
 
 class Watchlist extends StatefulWidget {
   final String searchText;
+  SortOrder sortOrder = SortOrder.none;
+  NameSort nameSort = NameSort.none;
 
-  const Watchlist({
+   Watchlist({
     super.key,
     required this.searchText,
   });
@@ -21,26 +23,24 @@ class Watchlist extends StatefulWidget {
 
 class _WatchlistState extends State<Watchlist> {
    bool showSortButton = false;
-   SortOrder sortOrder = SortOrder.none;
-   NameSort nameSort = NameSort.none;
    ScrollController scrollController = ScrollController();
    Timer? _scrollTimer;
 
   void cycleNameSort(){
     setState(() {
-      switch(nameSort){
+      switch(widget.nameSort){
         case NameSort.none:
-          nameSort = NameSort.AtoZ;
+          widget.nameSort = NameSort.AtoZ;
           break;
 
         case NameSort.AtoZ:
-          nameSort = NameSort.ZtoA;
+          widget.nameSort = NameSort.ZtoA;
           break;
 
         case NameSort.ZtoA:
-          nameSort = NameSort.AtoZ;
+          widget.nameSort = NameSort.AtoZ;
       }
-      sortOrder=SortOrder.none;
+      widget.sortOrder=SortOrder.none;
       showSortButton= true;
     });
     _scrollTimer= Timer(Duration(seconds: 2), (){
@@ -52,19 +52,19 @@ class _WatchlistState extends State<Watchlist> {
 
   void cycleSortOrder() {
     setState(() {
-      switch (sortOrder) {
+      switch (widget.sortOrder) {
         case SortOrder.none:
-          sortOrder = SortOrder.ltpAsc;
+          widget.sortOrder = SortOrder.ltpAsc;
           break;
         case SortOrder.ltpAsc:
-          sortOrder = SortOrder.ltpDesc;
+          widget.sortOrder = SortOrder.ltpDesc;
           break;
         case SortOrder.ltpDesc:
-          sortOrder = SortOrder.ltpAsc;
+          widget.sortOrder = SortOrder.ltpAsc;
           break;
       }
       showSortButton = true;
-      nameSort=NameSort.none;
+      widget.nameSort=NameSort.none;
     });
     _scrollTimer?.cancel();
     _scrollTimer = Timer(Duration(seconds: 2), () {
@@ -76,7 +76,7 @@ class _WatchlistState extends State<Watchlist> {
 
   Widget SortNameIcon() {
     IconData myicon = Icons.arrow_back_ios_new_sharp;
-    switch (nameSort) {
+    switch (widget.nameSort) {
       case NameSort.AtoZ:
         return Transform.rotate(
             angle: math.pi/2,
@@ -93,7 +93,7 @@ class _WatchlistState extends State<Watchlist> {
 
   Widget SortIcon() {
     IconData myicon = Icons.arrow_back_ios_new_sharp;
-    switch (sortOrder) {
+    switch (widget.sortOrder) {
       case SortOrder.ltpAsc:
         return Transform.rotate(
             angle: math.pi/2,
@@ -264,18 +264,18 @@ class _WatchlistState extends State<Watchlist> {
     //   }
     // }
 
-if(nameSort!= NameSort.none){
-    if(nameSort == NameSort.AtoZ){
+if(widget.nameSort!= NameSort.none){
+    if(widget.nameSort == NameSort.AtoZ){
       nameFilteredBank.sort((a,b)=>a.name.compareTo(b.name));
-    }else if(nameSort==NameSort.ZtoA){
+    }else if(widget.nameSort==NameSort.ZtoA){
       nameFilteredBank.sort((a,b)=>b.name.compareTo(a.name));
     }
 }
 
-if(sortOrder!=SortOrder.none){
-    if (sortOrder == SortOrder.ltpAsc) {
+if(widget.sortOrder!=SortOrder.none){
+    if (widget.sortOrder == SortOrder.ltpAsc) {
       nameFilteredBank.sort((a, b) => a.ltp.compareTo(b.ltp));
-    } else if (sortOrder == SortOrder.ltpDesc) {
+    } else if (widget.sortOrder == SortOrder.ltpDesc) {
       nameFilteredBank.sort((a, b) => b.ltp.compareTo(a.ltp));
     }
 }
@@ -347,7 +347,7 @@ if(sortOrder!=SortOrder.none){
                 ElevatedButton.icon(
                   onPressed: cycleNameSort,
                   icon: SortNameIcon(),
-                  label: Text(nameSort==NameSort.none?'Name':nameSort==NameSort.AtoZ?'A to Z':'Z to A', style: TextStyle(color: Colors.black)),
+                  label: Text(widget.nameSort==NameSort.none?'Name':widget.nameSort==NameSort.AtoZ?'A to Z':'Z to A', style: TextStyle(color: Colors.black)),
                   style: ElevatedButton.styleFrom(
                     elevation: 1,
                     shape: RoundedRectangleBorder(

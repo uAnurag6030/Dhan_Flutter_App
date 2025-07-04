@@ -2,13 +2,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'Searchbarnew.dart';
 
-class BlurMaker extends StatelessWidget {
-  final FocusNode focusNode;
-  final TextEditingController controller;
+class BlurMaker extends StatefulWidget {
+  late FocusNode focusNode;
+  late TextEditingController controller;
   final void Function(String) onChanged;
   final TabController tabController;
 
-  const BlurMaker({
+   BlurMaker({
     super.key,
     required this.focusNode,
     required this.controller,
@@ -16,13 +16,35 @@ class BlurMaker extends StatelessWidget {
   });
 
   @override
+  State<BlurMaker> createState() => _BlurMakerState();
+}
+
+class _BlurMakerState extends State<BlurMaker> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    widget.focusNode=FocusNode();
+    widget.controller=TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    widget.focusNode.dispose();
+    widget.controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (controller.text.isNotEmpty) {
-          controller.clear();
-          focusNode.unfocus();
-          onChanged('');
+        if (widget.controller.text.isNotEmpty) {
+          widget.controller.clear();
+          //focusNode.unfocus();
+          widget.onChanged('');
           return false;
         }
         return true;
@@ -58,7 +80,7 @@ class BlurMaker extends StatelessWidget {
                       children: [
                         InkWell(
                           onTap: () {
-                            focusNode.unfocus();
+                            widget.focusNode.unfocus();
                             Scaffold.of(context).openDrawer();
                           },
                           child: Container(
@@ -85,7 +107,7 @@ class BlurMaker extends StatelessWidget {
                           ),
                         ),
                         TabBar(
-                          controller: tabController,
+                          controller: widget.tabController,
                           splashFactory: NoSplash.splashFactory,
                           padding: const EdgeInsets.only(left: 8),
                           labelPadding: const EdgeInsets.only(right: 15),
@@ -109,9 +131,9 @@ class BlurMaker extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     child: Searchbarnew(
-                      focusNode: focusNode,
-                      controller: controller,
-                      onChanged: onChanged,
+                      focusNode: widget.focusNode,
+                      controller: widget.controller,
+                      onChanged: widget.onChanged,
                     ),
                   ),
                 ],
